@@ -125,13 +125,15 @@ app.listen(3000, () => {
 })
 
 
-app.use(express.static(path.join(__dirname, '/client/dist')));
+const pathToClientDist = path.join(__dirname, 'client', 'dist');
 
+// Serve static files from the 'client/dist' directory
+app.use(express.static(pathToClientDist));
 
+// Fallback route for Single Page Application (SPA)
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
-  })
-
+    res.sendFile(path.join(pathToClientDist, 'index.html'));
+});
 
 
 
